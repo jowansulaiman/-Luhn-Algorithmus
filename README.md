@@ -19,46 +19,45 @@ Der Luhn-Algorithmus, auch bekannt als Modul 10 oder Modul 10-Algorithmus
 **Schritt 4 -** Wenn das Gesamtmodulo 10 gleich 0 ist (wenn die Summe auf Null endet), dann ist die Zahl gemäß der Luhn-Formel gültig; andernfalls ist sie nicht gültig.
 
 ![](https://github.com/killuahh/-Luhn-Algorithmus/blob/master/gfg2-2-300x101.png)
+```cpp
+using namespace std; 
 
-> `using namespace std;` 
->   
-> `// Returns true if given card number is valid`
+// Returns true if given card number is valid
+bool 
+checkLuhn(const string& cardNo) {
+  
+  int nDigits = cardNo.length();
 
-> `bool checkLuhn(const string& cardNo)` 
+  int nSum = 0;
 
-> `{` 
+  for (int i = nDigits - 1; i >= 0; i--) {
 
->  int nDigits = cardNo.length();
+     int d = cardNo[i] - '0';
 
->     int nSum = 0;
+     if (i % 2 == 0)
+        d = d * 2;
 
->     for (int i = nDigits - 1; i >= 0; i--) {
+    if (d > 9)
+       d = d - 9;
 
->         int d = cardNo[i] - '0';
+    nSum += d;
+  }
+  return (nSum % 10 == 0);
+}
 
->         if (i % 2 == 0)
->             d = d * 2;
+ int main() 
+ { 
+    
+    string cardNo = "79927398713"; 
 
->         if (d > 9)
->             d = d - 9;
+     if (checkLuhn(cardNo)) 
+         printf("This is a valid card"); 
+     else
+         printf("This is not a valid card"); 
 
->         nSum += d;
+     return 0; 
+}
+```
 
->     }
->     return (nSum % 10 == 0);
 
-> }
-
-> int main() 
-> { 
->     
->    string cardNo = "79927398713"; 
-
->     if (checkLuhn(cardNo)) 
->         printf("This is a valid card"); 
->     else
->         printf("This is not a valid card"); 
-
->     return 0; 
-> }
 
